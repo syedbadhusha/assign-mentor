@@ -40,7 +40,7 @@ app.put("/assingmentor/", async (req, res) => {
     const students  =   req.body.students;
     const connection = await MongoClient.connect(URL);
     const db = connection.db("mentorandstudent");        
-  try {
+  try { 
         for (const stuname of students) {
             const collectionstu = db.collection("students");
             const collectionment = db.collection("mentors");
