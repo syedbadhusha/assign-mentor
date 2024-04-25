@@ -57,3 +57,7 @@
 ## To get mentor assigned Students list
 
     - End point /assignedstudents
+
+## To get all Mentors
+
+    - End Point /mentors
