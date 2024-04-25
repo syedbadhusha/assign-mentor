@@ -1,6 +1,8 @@
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb");
+const cors = require('cors')
 const app = express();
+app.use(cors());
 app.listen("3000");
 app.use(express.json());
 
