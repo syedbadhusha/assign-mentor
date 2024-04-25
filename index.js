@@ -134,3 +134,35 @@ app.get("/assignedstudent/:studentid", async (req, res) => {
     res.status(500).json({ message: "somthing went werong" });
   }
 });
+// Get All students
+app.get("/students", async (req, res) => {
+  try {
+    const connection = await MongoClient.connect(URL);
+    const db = connection.db("mentorandstudent");
+    const collection = db.collection("students");
+    const allstudent = await collection
+      .find()
+      .toArray();
+    await connection.close();
+    res.json(allstudent);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "somthing went werong" });
+  }
+});
+// Mentor Assigned Students
+app.get("/assignedstudents", async (req, res) => {
+  try {
+    const connection = await MongoClient.connect(URL);
+    const db = connection.db("mentorandstudent");
+    const collection = db.collection("students");
+    const assignedstudents = await collection
+      .find({ mentor: { $exists: true } })
+      .toArray();
+    await connection.close();
+    res.json(assignedstudents);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "somthing went werong" });
+  }
+});
