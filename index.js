@@ -85,7 +85,7 @@ app.put("/assingonestudent/:studentobjid", async (req, res) => {
     const collectionstu = db.collection("students");
     await collectionstu.updateOne(
       { _id: new ObjectId(studentid) },
-      { $set: {mentor:ObjectId(selectedmentorid)} }
+      { $set: {mentor:new ObjectId(req.body.mentor)} }
     );
     await connection.close();
     return res.json({
