@@ -78,18 +78,18 @@ app.get("/nonassignedstudents", async (req, res) => {
 // Select One Student and Assign one Mentor
 app.put("/assingonestudent/:studentobjid", async (req, res) => {
   const studentid = req.params.studentobjid;
-  const selectedmentorid = req.body._id;
+  const selectedmentorid = req.body.mentor;
   const connection = await MongoClient.connect(URL);
   const db = connection.db("mentorandstudent");
   try {
     const collectionstu = db.collection("students");
     await collectionstu.updateOne(
       { _id: new ObjectId(studentid) },
-      { $set: { mentor: new ObjectId(selectedmentorid) } }
+      { $set: {mentor:ObjectId(selectedmentorid)} }
     );
     await connection.close();
     return res.json({
-      message: `Studenst Assigned to Mentor ${selectedmentorid}`,
+      message: `Student Assigned to Mentor ${selectedmentorid}`,
     });
   } catch (err) {
     console.log(err);
