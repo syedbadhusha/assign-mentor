@@ -44,10 +44,10 @@ app.put("/assingmentor/:mentorobjid", async (req, res) => {
   const connection = await MongoClient.connect(URL);
   const db = connection.db("mentorandstudent");
   try {
-    for (const stuname of students) {
+    for (const stuId of students) {
       const collectionstu = db.collection("students");
       await collectionstu.updateOne(
-        { _id: new ObjectId(stuname._id) },
+        { _id: new ObjectId(stuId) },
         { $set: { mentor: new ObjectId(mentorid) } }
       );
     }
